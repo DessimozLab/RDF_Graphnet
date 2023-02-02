@@ -1,0 +1,1055 @@
+@prefix :        <http://purl.org/net/orth#> .
+@prefix oma:     <http://omabrowser.org/ontology/oma#> .
+@prefix orth:    <http://purl.org/net/orth#> .
+@prefix pav:     <http://purl.org/pav/> .
+@prefix lscr:    <http://purl.org/lscr#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix omadataset:  <https://omabrowser.org/oma/current/#> .
+@prefix omaorganism:  <https://omabrowser.org/oma/genome/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix omaHOG:  <https://omabrowser.org/oma/hog/resolve/> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix omaprot:  <https://omabrowser.org/oma/info/> .
+@prefix sio:     <http://semanticscience.org/resource/> .
+@prefix taxon:   <http://purl.uniprot.org/taxonomy/> .
+@prefix up:      <http://purl.uniprot.org/core/> .
+@prefix omaxref:  <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=> .
+@prefix obo:     <http://purl.obolibrary.org/obo/> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0049432-44689>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0049432-44689" ;
+      orth:hasHomologousMember
+              omaprot:DICDI09145 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/44689> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0101358-5809>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0101358-5809" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0101358-99158> , <https://omabrowser.org/oma/hog/resolve/HOG:C0101358-5811> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5809> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:PHYIT16606
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PHYIT16606> ;
+      obo:RO-0001018 oma:PhytophthorainfestansfromBroadInstitute ;
+      dct:identifier "PHYIT16606" ;
+      orth:organism <https://omabrowser.org/oma/genome/403677> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0094617-5806#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0094617-5806> ;
+      dct:identifier "HOG:C0094617-5806" .
+
+omaprot:METSG01873
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METSG01873> ;
+      obo:RO-0001018 oma:MethanosaetaconciliiGP6completegenome ;
+      dct:identifier "METSG01873" ;
+      orth:organism <https://omabrowser.org/oma/genome/990316> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0045888-5758>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0045888-5758" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0045888-370354> , <https://omabrowser.org/oma/hog/resolve/HOG:C0045888-5759> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5758> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0086046-5932#OG-ICHMU-1>
+      a       orth:OrthologsCluster ;
+      orth:hasHomologousMember
+              omaprot:ICHMU03108 ;
+      orth:hasTaxonomicRange
+              oma:TAX-RANGE-ICHMU .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0107981-137071>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0107981-137071" ;
+      orth:hasHomologousMember
+              omaprot:PLAFX00585 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/137071> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0059499-5660>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0059499-5660" ;
+      orth:hasHomologousMember
+              omaprot:LEIBR01037 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5660> .
+
+omaprot:PYRYC00470
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00470> ;
+      obo:RO-0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00470" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+omaprot:EIMMA02311
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=EIMMA02311> ;
+      obo:RO-0001018 oma:EimeriamaximafromENSEMBLprotistsv30 ;
+      dct:identifier "EIMMA02311" ;
+      orth:organism <https://omabrowser.org/oma/genome/5804> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0106097-5857>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0106097-5857" ;
+      orth:hasHomologousMember
+              omaprot:PLAFR01042 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5857> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0084262-33634#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0084262-33634> ;
+      dct:identifier "HOG:C0084262-33634" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0058313-2704647>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0058313-2704647" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0058313-75058> , <https://omabrowser.org/oma/hog/resolve/HOG:C0058313-5654> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2704647> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:PHYIT16607
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PHYIT16607> ;
+      obo:RO-0001018 oma:PhytophthorainfestansfromBroadInstitute ;
+      dct:identifier "PHYIT16607" ;
+      orth:organism <https://omabrowser.org/oma/genome/403677> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0020345-28890>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0020345-28890" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0020345-224756> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/28890> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0095555-5800#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0095555-5800> ;
+      dct:identifier "HOG:C0095555-5800" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017075-2194>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017075-2194" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0017075-45989> , <https://omabrowser.org/oma/hog/resolve/HOG:C0017075-679926> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2194> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:PYROT00971
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYROT00971> ;
+      obo:RO-0001018 oma:PyrobaculumogunienseTE7completegenome ;
+      dct:identifier "PYROT00971" ;
+      orth:organism <https://omabrowser.org/oma/genome/698757> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0045888-5759>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0045888-5759" ;
+      orth:hasHomologousMember
+              omaprot:ENTHI02813 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5759> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0010476-593750>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0010476-593750" ;
+      orth:hasHomologousMember
+              omaprot:METFS01494 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/593750> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0020877-693661>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0020877-693661" ;
+      orth:hasHomologousMember
+              omaprot:ARCVS00907 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/693661> .
+
+omaprot:PYRYC00471
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00471> ;
+      obo:RO-0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00471" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0132241-147429#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0132241-147429> ;
+      dct:identifier "HOG:C0132241-147429" .
+
+omaprot:EIMMA02312
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=EIMMA02312> ;
+      obo:RO-0001018 oma:EimeriamaximafromENSEMBLprotistsv30 ;
+      dct:identifier "EIMMA02312" ;
+      orth:organism <https://omabrowser.org/oma/genome/5804> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0104943-36329>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0104943-36329" ;
+      orth:hasHomologousMember
+              omaprot:PLAF702996 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/36329> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0106097-5858>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0106097-5858" ;
+      orth:hasHomologousMember
+              omaprot:PLAMA01434 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5858> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0018471-583356>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0018471-583356" ;
+      orth:hasHomologousMember
+              omaprot:IGNAA00190 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/583356> .
+
+omaprot:ENTHI00649
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ENTHI00649> ;
+      obo:RO-0001018 oma:EntamoebahistolyticafromEnsemblProtist ;
+      dct:identifier "ENTHI00649" ;
+      orth:organism <https://omabrowser.org/oma/genome/5759> .
+
+omaprot:AERPE00781
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=AERPE00781> ;
+      obo:RO-0001018 oma:AeropyrumpernixstrainK1chromosomecompletesequence ;
+      dct:identifier "AERPE00781" ;
+      orth:organism <https://omabrowser.org/oma/genome/272557> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0123368-564608>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0123368-564608" ;
+      orth:hasHomologousMember
+              omaprot:MICPC09716 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/564608> .
+
+omaprot:METAR00599
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METAR00599> ;
+      obo:RO-0001018 oma:UnculturedmethanogenicarchaeonRCIcompletegenome ;
+      dct:identifier "METAR00599" ;
+      orth:organism <https://omabrowser.org/oma/genome/351160> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0005212-427317>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0005212-427317" ;
+      orth:hasHomologousMember
+              omaprot:SULIM00634 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/427317> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0112258-2951>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0112258-2951" ;
+      orth:hasHomologousMember
+              omaprot:SYMMI15356 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2951> .
+
+omaprot:METSG01871
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METSG01871> ;
+      obo:RO-0001018 oma:MethanosaetaconciliiGP6completegenome ;
+      dct:identifier "METSG01871" ;
+      orth:organism <https://omabrowser.org/oma/genome/990316> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0022708-55529#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0022708-55529> ;
+      dct:identifier "HOG:C0022708-55529" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0060121.1a-353153>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0060121.1a-353153" ;
+      orth:hasHomologousMember
+              omaprot:TRYCC03971 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/353153> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0015556-634497>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0015556-634497" ;
+      orth:hasHomologousMember
+              omaprot:HALHT00362 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/634497> .
+
+omaprot:CHLVA05882
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=CHLVA05882> ;
+      obo:RO-0001018 oma:ChlorellavariabilisunplacedgenomicscaffoldCHLNCscaffold1wholegenomeshotgunsequence ;
+      dct:identifier "CHLVA05882" ;
+      orth:organism <https://omabrowser.org/oma/genome/554065> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0019187-273116>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0019187-273116" ;
+      orth:hasHomologousMember
+              omaprot:THEVO00707 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/273116> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0088844-6020#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0088844-6020> ;
+      dct:identifier "HOG:C0088844-6020" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0043319.1b-5759>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0043319.1b-5759" ;
+      orth:hasHomologousMember
+              omaprot:ENTHI07526 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5759> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0005212-427318>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0005212-427318" ;
+      orth:hasHomologousMember
+              omaprot:SULIA00641 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/427318> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0113579.1e-164328>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0113579.1e-164328" ;
+      orth:hasHomologousMember
+              omaprot:PHYRM04807 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/164328> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0058287-5671>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0058287-5671" ;
+      orth:hasHomologousMember
+              omaprot:LEIIN00877 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5671> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0058735-347515>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0058735-347515" ;
+      orth:hasHomologousMember
+              omaprot:LEIMA05566 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/347515> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0120835-296587>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0120835-296587" ;
+      orth:hasHomologousMember
+              omaprot:MICCC02197 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/296587> .
+
+omaprot:CHLVA05883
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=CHLVA05883> ;
+      obo:RO-0001018 oma:ChlorellavariabilisunplacedgenomicscaffoldCHLNCscaffold1wholegenomeshotgunsequence ;
+      dct:identifier "CHLVA05883" ;
+      orth:organism <https://omabrowser.org/oma/genome/554065> .
+
+omaprot:METPW01815
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METPW01815> ;
+      obo:RO-0001018 oma:MethanobacteriumspSWAN1completegenome ;
+      dct:identifier "METPW01815" ;
+      orth:organism <https://omabrowser.org/oma/genome/868131> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0077488.1b-4790>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0077488.1b-4790" ;
+      orth:hasHomologousMember
+              omaprot:PHYNI16546 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/4790> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0134032-62337>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0134032-62337" ;
+      orth:hasHomologousMember
+              omaprot:MISSI39794 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/62337> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0119541-70447>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0119541-70447" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0119541-436017> , <https://omabrowser.org/oma/hog/resolve/HOG:C0119541-70448> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/70447> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0019161-523841>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0019161-523841" ;
+      orth:hasHomologousMember
+              omaprot:HALMT02364 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/523841> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0019782-186497>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0019782-186497" ;
+      orth:hasHomologousMember
+              omaprot:PYRFU01943 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/186497> .
+
+omaprot:AERPE00783
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=AERPE00783> ;
+      obo:RO-0001018 oma:AeropyrumpernixstrainK1chromosomecompletesequence ;
+      dct:identifier "AERPE00783" ;
+      orth:organism <https://omabrowser.org/oma/genome/272557> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0110909-126793>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0110909-126793" ;
+      orth:hasHomologousMember
+              omaprot:PLAVS02391 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/126793> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0020405.1b-1006006>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0020405.1b-1006006" ;
+      orth:hasHomologousMember
+              omaprot:METCR01666 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/1006006> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0059972-2704647>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0059972-2704647" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0059972-5654> , <https://omabrowser.org/oma/hog/resolve/HOG:C0059972-75058> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2704647> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0013143-797303>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0013143-797303" ;
+      orth:hasHomologousMember
+              omaprot:NATP103329 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/797303> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0106650-126793>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0106650-126793" ;
+      orth:hasHomologousMember
+              omaprot:PLAVS04095 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/126793> .
+
+omaprot:PICGL23986
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PICGL23986> ;
+      obo:RO-0001018 oma:PinusglaucafromPlaza ;
+      dct:identifier "PICGL23986" ;
+      orth:organism <https://omabrowser.org/oma/genome/3330> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0114834-543769>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0114834-543769" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0114834-46433> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/543769> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:METAR00597
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METAR00597> ;
+      obo:RO-0001018 oma:UnculturedmethanogenicarchaeonRCIcompletegenome ;
+      dct:identifier "METAR00597" ;
+      orth:organism <https://omabrowser.org/oma/genome/351160> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0020246-529709>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0020246-529709" ;
+      orth:hasHomologousMember
+              omaprot:PYRYC01808 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/529709> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0018511-2160>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0018511-2160" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0018511-877455> , <https://omabrowser.org/oma/hog/resolve/HOG:C0018511-868131> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2160> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:METS500509
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METS500509> ;
+      obo:RO-0001018 oma:MetallosphaerasedulastrainATCC51363DSM5348chromosomecompletesequence ;
+      dct:identifier "METS500509" ;
+      orth:organism <https://omabrowser.org/oma/genome/399549> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0084230-12968>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0084230-12968" ;
+      orth:hasHomologousMember
+              omaprot:BLAHO00844 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/12968> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0051825-5690#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0051825-5690> ;
+      dct:identifier "HOG:C0051825-5690" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0032476-905079>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0032476-905079" ;
+      orth:hasHomologousMember
+              omaprot:GUITC06763 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/905079> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0119541-70448>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0119541-70448" ;
+      orth:hasHomologousMember
+              omaprot:OSTTA00979 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/70448> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0080618.2a-695850>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0080618.2a-695850" ;
+      orth:hasHomologousMember
+              omaprot:SAPPC19248 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/695850> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0080987-1094619>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0080987-1094619" ;
+      orth:hasHomologousMember
+              omaprot:PHYSP04675 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/1094619> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0001182-183967#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0001182-183967> ;
+      dct:identifier "HOG:C0001182-183967" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0078121.1b-1094619>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0078121.1b-1094619" ;
+      orth:hasHomologousMember
+              omaprot:PHYSP22299 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/1094619> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0035262-55529#OG-GUITH-1>
+      a       orth:OrthologsCluster ;
+      orth:hasHomologousMember
+              omaprot:GUITH22903 ;
+      orth:hasTaxonomicRange
+              oma:TAX-RANGE-GUITH .
+
+omaprot:PICGL23987
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PICGL23987> ;
+      obo:RO-0001018 oma:PinusglaucafromPlaza ;
+      dct:identifier "PICGL23987" ;
+      orth:organism <https://omabrowser.org/oma/genome/3330> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0099134-5811>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0099134-5811" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0099134-432359> , <https://omabrowser.org/oma/hog/resolve/HOG:C0099134-5809#OG-TOXGO-1> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5811> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0019723-2157>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0019723-2157" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0019723-2053491> , <https://omabrowser.org/oma/hog/resolve/HOG:C0019723-28889> , <https://omabrowser.org/oma/hog/resolve/HOG:C0019723-28890> , <https://omabrowser.org/oma/hog/resolve/HOG:C0019723-651137> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2157> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0062362.1b-159749>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0062362.1b-159749" ;
+      orth:hasHomologousMember
+              omaprot:THAOC14567 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/159749> .
+
+omaprot:METSG01870
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METSG01870> ;
+      obo:RO-0001018 oma:MethanosaetaconciliiGP6completegenome ;
+      dct:identifier "METSG01870" ;
+      orth:organism <https://omabrowser.org/oma/genome/990316> .
+
+omaprot:PYRYC00475
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00475> ;
+      obo:RO-0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00475" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+omaprot:EIMMA02316
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=EIMMA02316> ;
+      obo:RO-0001018 oma:EimeriamaximafromENSEMBLprotistsv30 ;
+      dct:identifier "EIMMA02316" ;
+      orth:organism <https://omabrowser.org/oma/genome/5804> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0015661.2a-797210>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0015661.2a-797210" ;
+      orth:hasHomologousMember
+              omaprot:HALXS00961 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/797210> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0113047-2698737#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0113047-2698737> ;
+      dct:identifier "HOG:C0113047-2698737" .
+
+omaprot:METMS01048
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METMS01048> ;
+      obo:RO-0001018 oma:MethanohalophilusmahiistrainATCC35705DSM5219SLPchromosomecompletesequence ;
+      dct:identifier "METMS01048" ;
+      orth:organism <https://omabrowser.org/oma/genome/547558> .
+
+omaprot:AERPE00785
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=AERPE00785> ;
+      obo:RO-0001018 oma:AeropyrumpernixstrainK1chromosomecompletesequence ;
+      dct:identifier "AERPE00785" ;
+      orth:organism <https://omabrowser.org/oma/genome/272557> .
+
+omaprot:PHYIT16604
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PHYIT16604> ;
+      obo:RO-0001018 oma:PhytophthorainfestansfromBroadInstitute ;
+      dct:identifier "PHYIT16604" ;
+      orth:organism <https://omabrowser.org/oma/genome/403677> .
+
+omaprot:PICGL23988
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PICGL23988> ;
+      obo:RO-0001018 oma:PinusglaucafromPlaza ;
+      dct:identifier "PICGL23988" ;
+      orth:organism <https://omabrowser.org/oma/genome/3330> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017134-351160>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017134-351160" ;
+      orth:hasHomologousMember
+              omaprot:METAR02049 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/351160> .
+
+omaprot:METAR00595
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METAR00595> ;
+      obo:RO-0001018 oma:UnculturedmethanogenicarchaeonRCIcompletegenome ;
+      dct:identifier "METAR00595" ;
+      orth:organism <https://omabrowser.org/oma/genome/351160> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0018514-426118>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0018514-426118" ;
+      orth:hasHomologousMember
+              omaprot:SULIK00194 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/426118> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0119838-70448>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0119838-70448" ;
+      orth:hasHomologousMember
+              omaprot:OSTTA03057 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/70448> .
+
+omaprot:PYRYC00472
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00472> ;
+      obo:RO-0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00472" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0068035-4769#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0068035-4769> ;
+      dct:identifier "HOG:C0068035-4769" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0109136.1b-5858>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0109136.1b-5858" ;
+      orth:hasHomologousMember
+              omaprot:PLAMA06073 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5858> .
+
+omaprot:METPW01810
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METPW01810> ;
+      obo:RO-0001018 oma:MethanobacteriumspSWAN1completegenome ;
+      dct:identifier "METPW01810" ;
+      orth:organism <https://omabrowser.org/oma/genome/868131> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0051466.1dz-1055687>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0051466.1dz-1055687" ;
+      orth:hasHomologousMember
+              omaprot:TRYVY01822 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/1055687> .
+
+omaprot:AERPE00786
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=AERPE00786> ;
+      obo:RO-0001018 oma:AeropyrumpernixstrainK1chromosomecompletesequence ;
+      dct:identifier "AERPE00786" ;
+      orth:organism <https://omabrowser.org/oma/genome/272557> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0018525-56688>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0018525-56688" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0018525-416348> , <https://omabrowser.org/oma/hog/resolve/HOG:C0018525-63740> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/56688> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0019620-178306>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0019620-178306" ;
+      orth:hasHomologousMember
+              omaprot:PYRAE00461 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/178306> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0107754-36329>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0107754-36329" ;
+      orth:hasHomologousMember
+              omaprot:PLAF704006 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/36329> .
+
+omaprot:SULID00220
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=SULID00220> ;
+      obo:RO-0001018 oma:SulfolobusislandicusstrainLD85Lassen2chromosomecompletesequence ;
+      dct:identifier "SULID00220" ;
+      orth:organism <https://omabrowser.org/oma/genome/425944> .
+
+omaprot:PHYIT16605
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PHYIT16605> ;
+      obo:RO-0001018 oma:PhytophthorainfestansfromBroadInstitute ;
+      dct:identifier "PHYIT16605" ;
+      orth:organism <https://omabrowser.org/oma/genome/403677> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0020866-183924>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0020866-183924" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0020866-114380> , <https://omabrowser.org/oma/hog/resolve/HOG:C0020866-368408> , <https://omabrowser.org/oma/hog/resolve/HOG:C0020866-2157#PG-1> , <https://omabrowser.org/oma/hog/resolve/HOG:C0020866-118883> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/183924> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0119311-3042>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0119311-3042" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0119311-3067> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/3042> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0065088-2696291>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0065088-2696291" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0065088-44056> , <https://omabrowser.org/oma/hog/resolve/HOG:C0065088-2836> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2696291> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0110334-5811>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0110334-5811" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0110334-432359> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5811> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0030328-55529>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0030328-55529" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0030328-905079> , <https://omabrowser.org/oma/hog/resolve/HOG:C0030328-55529#OG-GUITH-1> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/55529> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0065019-296543>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0065019-296543" ;
+      orth:hasHomologousMember
+              omaprot:THAPS03955 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/296543> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0003936-2279>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0003936-2279" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0003936-591019> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2279> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0004526-555311>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0004526-555311" ;
+      orth:hasHomologousMember
+              omaprot:SACS901064 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/555311> .
+
+omaprot:PYRYC00473
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00473> ;
+      obo:RO-0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00473" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0028911-55529>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0028911-55529" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0028911-905079> , <https://omabrowser.org/oma/hog/resolve/HOG:C0028911-55529#OG-GUITH-1> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/55529> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0015324-183963#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0015324-183963> ;
+      dct:identifier "HOG:C0015324-183963" .
+
+omaprot:EIMMA02314
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=EIMMA02314> ;
+      obo:RO-0001018 oma:EimeriamaximafromENSEMBLprotistsv30 ;
+      dct:identifier "EIMMA02314" ;
+      orth:organism <https://omabrowser.org/oma/genome/5804> .
+
+omaprot:METPW01811
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=METPW01811> ;
+      obo:RO-0001018 oma:MethanobacteriumspSWAN1completegenome ;
+      dct:identifier "METPW01811" ;
+      orth:organism <https://omabrowser.org/oma/genome/868131> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0059251-5658>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0059251-5658" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0059251-38574> , <https://omabrowser.org/oma/hog/resolve/HOG:C0059251-929439> , <https://omabrowser.org/oma/hog/resolve/HOG:C0059251-347515> , <https://omabrowser.org/oma/hog/resolve/HOG:C0059251-5660> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5658> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:TETTS07522
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=TETTS07522> ;
+      obo:RO-0001018 oma:TetrahymenathermophilafromENSEMBLprotistsv31 ;
+      dct:identifier "TETTS07522" ;
+      orth:organism <https://omabrowser.org/oma/genome/312017> .
+
+omaprot:SULID00221
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=SULID00221> ;
+      obo:RO-0001018 oma:SulfolobusislandicusstrainLD85Lassen2chromosomecompletesequence ;
+      dct:identifier "SULID00221" ;
+      orth:organism <https://omabrowser.org/oma/genome/425944> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0007448-420247>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0007448-420247" ;
+      orth:hasHomologousMember
+              omaprot:METS300784 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/420247> .
+
+omaprot:PHYPR08034
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PHYPR08034> ;
+      obo:RO-0001018 oma:PhytophthoraparasiticaGCA000509505fromEnsemblProtists36 ;
+      dct:identifier "PHYPR08034" ;
+      orth:organism <https://omabrowser.org/oma/genome/4792> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0016770-797210>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0016770-797210" ;
+      orth:hasHomologousMember
+              omaprot:HALXS02495 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/797210> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0091641.2f-5888>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0091641.2f-5888" ;
+      orth:hasHomologousMember
+              omaprot:PARTE20556 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/5888> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0099962-432359>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0099962-432359" ;
+      orth:hasHomologousMember
+              omaprot:TOXGV07156 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/432359> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0061916-35127>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0061916-35127" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0061916-296543> , <https://omabrowser.org/oma/hog/resolve/HOG:C0061916-159749> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/35127> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+omaprot:CHLVA05888
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=CHLVA05888> ;
+      obo:RO-0001018 oma:ChlorellavariabilisunplacedgenomicscaffoldCHLNCscaffold1wholegenomeshotgunsequence ;
+      dct:identifier "CHLVA05888" ;
+      orth:organism <https://omabrowser.org/oma/genome/554065> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0005518-164450>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0005518-164450" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0005518-572478> , <https://omabrowser.org/oma/hog/resolve/HOG:C0005518-985053> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/164450> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0033139-55529>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0033139-55529" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0033139-905079> , <https://omabrowser.org/oma/hog/resolve/HOG:C0033139-55529#OG-GUITH-1> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/55529> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0126900-3318#ROOT-HOG>
+      a       orth:HierarchicalGeneTree ;
+      obo:CDAO-0000148 <https://omabrowser.org/oma/hog/resolve/HOG:C0126900-3318> ;
+      dct:identifier "HOG:C0126900-3318" .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_272844>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017089.5f_272844" ;
+      orth:hasHomologousMember
+              omaprot:PYRAB00578 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/272844> .
+
+omaprot:PYRAB00578
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRAB00578> ;
+      obo:RO_0001018 oma:PyrococcusabyssistrainOrsayGE5chromosomecompletesequence ;
+      dct:identifier "PYRAB00578" ;
+      orth:organism <https://omabrowser.org/oma/genome/272844> .
+
+
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_70601>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017089.5f_70601" ;
+      orth:hasHomologousMember
+              omaprot:PYRHO01642 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/70601> .
+
+omaprot:PYRHO01642
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRHO01642> ;
+      obo:RO_0001018 oma:PyrococcushorikoshiistrainOT3chromosomecompletesequence ;
+      dct:identifier "PYRHO01642" ;
+      orth:organism <https://omabrowser.org/oma/genome/70601> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_529709>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017089.5f_529709" ;
+      orth:hasHomologousMember
+              omaprot:PYRYC00473 ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/529709> .
+
+omaprot:PYRYC00473
+      a       orth:Protein ;
+      rdfs:seeAlso <http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PYRYC00473> ;
+      obo:RO_0001018 oma:PyrococcusyayanosiiCH1completegenome ;
+      dct:identifier "PYRYC00473" ;
+      orth:organism <https://omabrowser.org/oma/genome/529709> .
+
+<https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_2260>
+      a       orth:OrthologsCluster ;
+      dct:identifier "HOG:C0017089.5f_2260" ;
+      orth:hasHomologousMember
+              <https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_70601> , <https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_186497> , <https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_342949> , <https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_272844> , <https://omabrowser.org/oma/hog/resolve/HOG:C0017089.5f_529709> ;
+      orth:hasTaxonomicRange
+              <http://purl.uniprot.org/taxonomy/2260> ;
+      orth:inDataset omadataset:DATASET-OMA .
+
+

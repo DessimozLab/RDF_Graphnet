@@ -1,0 +1,55 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix lscr: <http://purl.org/lscr#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix oma: <http://omabrowser.org/ontology/oma#> .
+@prefix omaorganism: <http://omabrowser.org/oma/genome/> .
+@prefix omaprot: <https://omabrowser.org/oma/info/> .
+@prefix orth: <http://purl.org/net/orth#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sio: <http://semanticscience.org/resource/> .
+@prefix taxon: <http://purl.uniprot.org/taxonomy/> .
+@prefix up: <http://purl.uniprot.org/core/> .
+@prefix upuniprot: <http://purl.uniprot.org/uniprot/> .
+
+oma:swissProtId rdfs:subPropertyOf dct:identifier .
+
+
+omaprot:PYRYC00473 dct:identifier "529709.PYCH-04960",
+        "AEH24186.1",
+        "PYCH-04960" ;
+    lscr:xrefNCBIProtein <https://www.ncbi.nlm.nih.gov/protein/AEH24186.1> ;
+    lscr:xrefNCBIRefSeq <https://www.ncbi.nlm.nih.gov/protein/WP-237698682> ;
+    lscr:xrefUniprot upuniprot:F8AIS7 ;
+    sio:SIO-010079 oma:GENE-10837072 .
+
+
+upuniprot:F8AIS7 a up:Protein ;
+    dct:identifier "F8AIS7" .
+
+omaprot:PYRHO01642 dct:identifier "70601.3258014",
+        "BAA30697.1",
+        "HA331_02185",
+        "PH1585" ;
+    lscr:xrefEMBLSequence <http://www.ebi.ac.uk/ena/data/view/BA000001> ;
+    lscr:xrefNCBIProtein <https://www.ncbi.nlm.nih.gov/protein/BAA30697.1> ;
+    lscr:xrefNCBIRefSeq <https://www.ncbi.nlm.nih.gov/protein/WP_048053434> ;
+    lscr:xrefUniprot upuniprot:A0A832T5P4,
+        upuniprot:O59263 .
+
+omaprot:PYRAB00578 dct:identifier "272844.PAB1971",
+        "CAB49499.1",
+        "PAB1971",
+        "PYRAB05770" ;
+    lscr:xrefEMBLSequence <http://www.ebi.ac.uk/ena/data/view/AL096836> ;
+    lscr:xrefNCBIProtein <https://www.ncbi.nlm.nih.gov/protein/CAB49499.1> ;
+    lscr:xrefNCBIRefSeq <https://www.ncbi.nlm.nih.gov/protein/WP_010867701> ;
+    lscr:xrefUniprot upuniprot:Q9V152 ;
+    sio:SIO_010079 oma:GENE_1495482 .
+
+omaprot:PYRYC00473 dct:identifier "529709.PYCH_04960",
+        "AEH24186.1",
+        "PYCH_04960" ;
+    lscr:xrefNCBIProtein <https://www.ncbi.nlm.nih.gov/protein/AEH24186.1> ;
+    lscr:xrefNCBIRefSeq <https://www.ncbi.nlm.nih.gov/protein/WP_237698682> ;
+    lscr:xrefUniprot upuniprot:F8AIS7 ;
+    sio:SIO_010079 oma:GENE_10837072 .
