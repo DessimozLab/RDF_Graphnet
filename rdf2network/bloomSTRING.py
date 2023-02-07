@@ -67,9 +67,9 @@ cluster = SLURMCluster(
     #' source /work/FAC/FBM/DBC/cdessim2/default/dmoi/miniconda3/etc/profile.d/conda.sh  ' ,
     #'conda activate ML2'
     #],
-    #scheduler_options={'interface': 'ens2f0' },
+    scheduler_options={'interface': 'ens2f0np0' },
     #if gpu node
-    scheduler_options={'interface': 'ens3f0np0' },
+    #scheduler_options={'interface': 'ens3f0np0' },
     #extra=[ "--lifetime-stagger", "4m"]
 )
 print(cluster.job_script())
