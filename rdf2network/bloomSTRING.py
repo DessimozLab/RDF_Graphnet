@@ -17,7 +17,7 @@ from dask import dataframe as dd
 
 
 # In[2]:
-
+import os
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -74,7 +74,7 @@ cluster = SLURMCluster(
 )
 print(cluster.job_script())
 print(cluster)
-cluster.scale(jobs = 100)
+cluster.scale(jobs = 20)
 print(cluster.dashboard_link)
 client = Client(cluster , timeout='450s' , set_as_default=True )
 
@@ -82,8 +82,9 @@ client = Client(cluster , timeout='450s' , set_as_default=True )
 # In[10]:
 
 
+
 #find which species each of the cogs has an interaction in
-link_df = dd.read_csv(path + 'datasets/STRING/protein.links.full.v11.5.txt',  blocksize=15e6 , header = 0, sep = ' ')
+link_df = dd.read_csv(path + 'datasets/STRING/protein.links.full.v11.5.txt',  blocksize=75e6 , header = 0, sep = ' ')
 print(link_df)
 
 
@@ -138,27 +139,24 @@ def treesum(totalfilter):
 
 b=BloomFilter(max_elements=10**8, error_rate=0.001 ,start_fresh = True)
 partitions  = link_df.to_delayed()
-print('map cogs')
 res1 = [ protlinks_species(p) for p in partitions ]
 print('done')
 print('make filters')
 res2 = [ return_filter(p) for p in res1 ]
+chunksize = 75
 
+overwrite = False
 
-finals =[]
-
-with tqdm.tqdm(total=int(len(res2)/512)+1) as pbar:
-    for chunk in range(int(len(res2)/512)+1):
+with tqdm.tqdm(total=int(len(res2)/chunksize)+1) as pbar:
+    for chunk in range(int(len(res2)/chunksize)+1):
         #print(chunk*1024)
-        res3 = res2[chunk*512:(chunk+1)*512]
-        res4 = treesum(res3)
-        res4 = dask.compute(res4)
-        finals.append(res4[0])
-        pbar.set_description('processed: %d' % (1 + chunk ))
-        pbar.update(1)  
-
-#dask.compute(*finals)
-
-with open('bloomfinal_big.pkl' , 'wb' ) as finalout:
-    finalout.write(pickle.dumps(finals))
+        if os.path.isfile('bloomfinal_big_'+str(chunk)+'_.pkl' ) == False or overwrite == True:
+            res3 = res2[chunk*chunksize:(chunk+1)*chunksize]
+            res4 = treesum(res3)
+            res4 = dask.compute(res4)
+            pbar.set_description('processed: %d' % (1 + chunk ))
+            pbar.update(1)
+            print(res4[0])
+            with open('bloomfinal_big_'+str(chunk)+'_.pkl' , 'wb' ) as finalout:
+                finalout.write(pickle.dumps(res4[0]))
 
