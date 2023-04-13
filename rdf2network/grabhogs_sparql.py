@@ -6,6 +6,7 @@ import sys, os, time
 import pandas as pd
 import stringdb
 
+
 # always display full column results (don't truncate output)
 pd.set_option('display.max_colwidth', None)
 
@@ -144,7 +145,7 @@ def get_string_id(uniprot_url, taxon_url):
 
 # HERE, get HOGS for all vertices in G from oma sparql endpoint
 
-def grab_hogs( G , subg , cross_ref , sparql_endpoint= None):
+def grab_hogs( G , subg , cross_ref= rdflib.term.URIRef("http://purl.org/lscr#xrefUniprot") , sparql_endpoint= None):
     start_time = time.time()
 
     num_queries = 0
