@@ -12,4 +12,4 @@ def remove_by_predicate_object(rg, predicate, object):
 def sample_by_subject(rg, subject):
     for s,p,o in rg.triples((subject,None,None)):
         yield p,o
-        
+

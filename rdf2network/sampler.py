@@ -58,9 +58,7 @@ def sample( rg  , seed , sample_run= 10, limit = 5,  layers = 3 , layer_limit = 
     return subG
 
 def add_xrefs(rg_info, subg):
-    print(subg)
     cross_ref = rdflib.term.URIRef('http://purl.org/lscr#xrefUniprot')
-    string_ids_dict = {}
     # put in dictionary the IDs of original proteins (for which we got orthologs and paralogs)
     #iterate over all the subjects and objects in subg
     prots = set([ o for o in subg.objects() ] ).union(

@@ -1,6 +1,6 @@
 import time, traceback
 import sys
-from SPARQLWrapper import SPARQLWrapper, JSON , JSONLD
+from SPARQLWrapper import SPARQLWrapper, JSON , RDF , JSONLD , TURTLE
 from rdflib import Graph, URIRef
 import json
 from rdflib.plugins.sparql.results.jsonresults import JSONResultParser
@@ -9,6 +9,8 @@ import rdflib
 import sys, os, time
 import pandas as pd
 import stringdb
+import xmltodict
+import itertools
 
 # always display full column results (don't truncate output)
 pd.set_option('display.max_colwidth', None)
@@ -51,10 +53,6 @@ def get_string_id(uniprot_url, taxon_url):
         except:
             pass
 
-
-
-# this is the batch size we want for SPARQL queries
-LIMIT = 10000
 def results_to_pandas(results):
     # how to transform SPARQL results into Pandas dataframes
     if(len(results["results"]["bindings"]) == 0):
@@ -74,7 +72,7 @@ def results_to_pandas(results):
     df = pd.DataFrame(table, columns=list(header))
     return df 
 
-def query_SPARQL_with_limit_offset(sparql_query, limit, offset, sparql_endpoint , fmt = JSON):
+def query_SPARQL_with_limit_offset(sparql_query, limit, offset, sparql_endpoint , fmt = JSON , retgraph = True):
     global over_limits
     query_with_limit_offset = f'{sparql_query} LIMIT {limit} OFFSET {offset}'
     #print(query_with_limit_offset)
@@ -85,18 +83,38 @@ def query_SPARQL_with_limit_offset(sparql_query, limit, offset, sparql_endpoint 
     else:
         print("Error: Configure SPARQL Endpoint")
         return None    
-    import pdb ; pdb.set_trace()
 
-    if fmt == JSON  and (len(results_OMA["results"]["bindings"]) == LIMIT):
-        # Request next set of results until end, append to previous
-        res = results_OMA["results"]["bindings"]
-        while len(res) == LIMIT and offset < 5*LIMIT:
-            #print("Over 10K results for {}".format(results_OMA["results"]["bindings"][1]))    
-            additional_bindings =  query_SPARQL_with_limit_offset(sparql_query, offset , offset + LIMIT, sparql_endpoint )
-            offset += LIMIT
-            results_OMA["results"]["bindings"] += additional_bindings["results"]["bindings"]
-            res = additional_bindings["results"]["bindings"]
-    return results_OMA
+    if retgraph == True:
+        g = Graph()
+        for entry in results_OMA["results"]["bindings"]:
+            for o1,o2 in itertools.combinations(entry, 2): 
+                p = o1 +'_'+o2
+                if entry.get(o1, None) != None and entry.get(o2, None) != None:
+                    g.add((URIRef(entry[o1]["value"]), URIRef(p) , URIRef(entry[o2]["value"])))
+
+        """
+        if len(subjs) == LIMIT:
+            while len(subjs) == LIMIT and offset < 5*LIMIT:    
+                offset += LIMIT
+                additional_bindings =  query_SPARQL_with_limit_offset(sparql_query, limit , offset, sparql_endpoint , fmt = TURTLE) 
+                g += additional_bindings
+                subjs = [ s for s in g.subjects()]
+        """
+
+        return g
+    else :
+        if (len(results_OMA["results"]["bindings"]) == LIMIT):
+            # Request next set of results until end, append to previous
+            res = results_OMA["results"]["bindings"]
+            while len(res) == LIMIT and offset < 5*LIMIT:
+                #print("Over 10K results for {}".format(results_OMA["results"]["bindings"][1]))    
+                additional_bindings =  query_SPARQL_with_limit_offset(sparql_query, offset , offset + LIMIT, sparql_endpoint )
+                offset += LIMIT
+                results_OMA["results"]["bindings"] += additional_bindings["results"]["bindings"]
+                res = additional_bindings["results"]["bindings"]
+            return results_OMA
+        else:
+            return results_OMA
 
 def query_orthologs(uniprot_entry, sparql_endpoint , return_graph = False):
 
@@ -128,21 +146,18 @@ def query_orthologs(uniprot_entry, sparql_endpoint , return_graph = False):
     """
     
     if return_graph == True:
-        fmt = JSONLD
-        data = query_SPARQL_with_limit_offset(query_OMA_orthologs, LIMIT, offset, sparql_endpoint , fmt= fmt)
-        graph = Graph()
-        graph.parse(data=json.dumps(data), format='json-ld')
-        return  graph
+        fmt = JSON
+
+        data = query_SPARQL_with_limit_offset(query_OMA_orthologs, LIMIT, offset, sparql_endpoint , fmt= fmt , retgraph = True)
+        return  data
     else:       
         fmt = JSON
-        results_OMA = query_SPARQL_with_limit_offset(query_OMA_orthologs, LIMIT, offset, sparql_endpoint)
+        results_OMA = query_SPARQL_with_limit_offset(query_OMA_orthologs, LIMIT, offset, sparql_endpoint , fmt = fmt,  retgraph = False)
         results_OMA = results_to_pandas(results_OMA)
         return results_OMA
         
 def query_paralogs(uniprot_entry, sparql_endpoint , return_graph = False):
-    
     offset = 0
-    
     query_OMA_paralogs = """
     PREFIX obo: <http://purl.obolibrary.org/obo/>
     PREFIX orth: <http://purl.org/net/orth#>
@@ -169,17 +184,16 @@ def query_paralogs(uniprot_entry, sparql_endpoint , return_graph = False):
     """
 
     if return_graph == True:
-        fmt = JSONLD
-        data = query_SPARQL_with_limit_offset(query_OMA_paralogs, LIMIT, offset, sparql_endpoint , fmt= fmt)
-        graph = Graph()
-        graph.parse(data=json.dumps(data), format='json-ld')
-        return  graph
+        fmt = JSON
+        data = query_SPARQL_with_limit_offset(query_OMA_paralogs, LIMIT, offset, sparql_endpoint , fmt= fmt, retgraph= True)
+        return  data
     else:       
         fmt = JSON
-        results_OMA = query_SPARQL_with_limit_offset(query_OMA_paralogs, LIMIT, offset, sparql_endpoint)
+        results_OMA = query_SPARQL_with_limit_offset(query_OMA_paralogs, LIMIT, offset, sparql_endpoint , fmt = fmt,  retgraph= False)
         results_OMA = results_to_pandas(results_OMA)
         return results_OMA
-"""
+    
+
 def grab_hogs_graph( subg , cross_ref , sparql_endpoint= None , USE_CASE = 1 , verbose = True , cross_ref_prop = rdflib.term.URIRef("http://purl.org/lscr#xrefUniprot")):
     start_time = time.time()
     num_queries = 0
@@ -188,8 +202,7 @@ def grab_hogs_graph( subg , cross_ref , sparql_endpoint= None , USE_CASE = 1 , v
     over_limits = 0
     proteins_by_species = {}
     # FIRST, need to get UniProt IDs for all string prots needed
-    subjs = [[o for (s,p,o) in subg.triples((None, cross_ref, None))]]
-    subjs = [ s[0] for s in subjs if len(s) > 0 ]
+    subjs = [o for (s,p,o) in subg.triples((None, cross_ref, None))]
     subjs = set(subjs)
     print(len(subjs))
     orthograph = Graph()
@@ -216,57 +229,13 @@ def grab_hogs_graph( subg , cross_ref , sparql_endpoint= None , USE_CASE = 1 , v
             num_errors += 1
             pass
         try:
-            results_subj_para , g1 = query_paralogs(cross_ref_subj, sparql_OMA , return_graph = True)
-            if("para_protein_uniprot" in results_subj_para.columns):
-                df1_grouped = results_subj_para[["para_protein_uniprot","taxon_para"]].groupby('taxon_para')
-                orthograph += g1
+            g1 = query_paralogs(cross_ref_subj, sparql_OMA , return_graph = True)
+            orthograph += g1
+            #results_to_pandas(results_obj)
         except Exception:
-            #traceback.print_exc()
+            traceback.print_exc()
             num_errors += 1
             pass
-        #results_to_pandas(results_obj)
-        num_queries += 2
-    end_time = time.time()
-    if verbose == True:
-        print("Total time for {} SPARQL queries: {} seconds (multiple batch calls in: {} cases)".format(num_queries, end_time - start_time, over_limits))
-        print("Num errors: {}".format(num_errors)) 
-    return orthograph
-"""
-
-
-def grab_hogs_graph( subg , cross_ref , sparql_endpoint= None , USE_CASE = 1 , verbose = True , cross_ref_prop = rdflib.term.URIRef("http://purl.org/lscr#xrefUniprot")):
-    start_time = time.time()
-    num_queries = 0
-    num_errors = 0
-    global over_limits 
-    over_limits = 0
-    proteins_by_species = {}
-    # FIRST, need to get UniProt IDs for all string prots needed
-    subjs = [[o for (s,p,o) in subg.triples((None, cross_ref, None))]]
-    subjs = [ s[0] for s in subjs if len(s) > 0 ]
-    subjs = set(subjs)
-    print(len(subjs))
-    orthograph = Graph()
-    for cross_ref_subj in subjs:
-        # get cross reference for interacting protein 1, cross_ref_subj                
-        # options: 1. UNIL OMA endpoint; 2. official OMA endpoint;
-        if(USE_CASE == 1):
-            sparql_OMA = SPARQLWrapper("https://unil.omabrowser.org/sparql/")
-        elif(USE_CASE == 2):
-            sparql_OMA = SPARQLWrapper("https://sparql.omabrowser.org/sparql/")
-        else:
-            sparql_OMA = None
-        # get HOG of interacting protein 1, cross_ref_subj (orthologous proteins + species)
-        cross_ref_subj = "<" + cross_ref_subj + ">"  
-        #print("Getting HOGs of " + cross_ref_subj)
-        # try querying the remote server but skip over errors if any
-        # NOTE: it seems like errors happen when number of results is too big,
-        # e.g. <http://purl.uniprot.org/uniprot/B6JXK8> seems to have 55K paralogs!?
-        g1 = query_orthologs(cross_ref_subj, sparql_OMA , return_graph=True )
-        orthograph += g1
-        g1 = query_paralogs(cross_ref_subj, sparql_OMA , return_graph = True)
-        orthograph += g1
-        #results_to_pandas(results_obj)
         num_queries += 2
     end_time = time.time()
     if verbose == True:
