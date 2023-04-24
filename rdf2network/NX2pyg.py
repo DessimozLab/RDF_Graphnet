@@ -1,38 +1,45 @@
 import torch
 from torch_geometric.data import HeteroData , Data
 import networkx as nx
+from rdflib.namespace import RDF
+
 import rdflib
-import sparse 
-import numpy as np
+import sparse
+
+
+
 
 # transform an rdflib graph to a heterodata object
-def rdf_to_hetero(rdf_graph):
-    
+def rdf_to_hetero(rdf_graph , predlinks = None, prednodes = None):
     # create a new heterodata object
+
     data = HeteroData()
     # assign edge types from the predicate
     edge_types = set([p for s,p,o in rdf_graph])
     edge_types = {e:i for i,e in enumerate(edge_types)}
 
-    #assign a matrix row to each subject and object
-    subjects = set([s for s,p,o in rdf_graph])
-    objects = set([o for s,p,o in rdf_graph])
-    total_nodes = subjects.union(objects)
-    object_types = set( [ o.n3().split('/')[0:-1] for in total_nodes] )
-    object_types = {o:i for i,o in enumerate(object_types)}
-    #create 1 hot encoding for each node
-    node_types = torch.zeros(len(total_nodes), len(object_types))
-    for i, node in enumerate(total_nodes):
-        node_types[i, object_types[node.n3().split('/')[0:-1]]] = 1
-    data['node'].x = node_types
-    #create a sparse tensor node x node x edge_type
-    for edge_type in edge_types:
-        adj  = lil_matrix( shape = (len(total_nodes), len(total_nodes))))
-        [ adj[total_nodes[s], total_nodes[o]] = 1 for s,p,o in rdf_graph.triples((None, edge_type, None))]
-        adj = from_scipy_sparse_matrix(adj)
-        data['node' , p  , 'node'].edge_index = adj
-        data['node' , p  , 'node'].edge_attr = torch.ones(adj.shape[1], 1)
+    # Define the RDF types we want to find
+    subject_type = URIRef(RDF.subject)
+    object_type = URIRef(RDF.object)
 
+    # Find all subjects and objects and their types
+    subject_types = set()
+    object_types = set()
+    for subject, predicate, obj in g:
+        if predicate == subject_type:
+            subject_types.add((subject, obj))
+        elif predicate == object_type:
+            object_types.add((subject, obj))
+    for edge_type in edge_types:
+        for stype in subject_types:
+            for otype in object_types:
+                # create a dictionary of nodes
+                rows = { tup[0]:i for i,tup in enumerate(rdf_graph.triples(( None , subject_type, stype) ) ) }
+                columns = { tup[2]:i for i,tup in enumerate(rdf_graph.triples(( None , object_type, otype) ) ) }
+                adj = scipy.sparse.lil_matrix( shape = (len(rows), len(columns)))
+                [ adj[rows[s], columns[o]] = 1 for s,p,o in rdf_graph.triples((None, edge_type, None))]
+                data[ stype.n3() , p.n3() , otype.n3() ].edge_index = from_scipy_sparse_matrix(adj)
+                
     return data
 
 

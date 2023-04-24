@@ -10,8 +10,6 @@ from rdflib import Graph, URIRef
 
 
 if __name__ == "__main__":        
-    
-
     #parse the command line arguments
     import argparse
     parser = argparse.ArgumentParser(description='Compile a dataset from STRING RDF')
@@ -24,7 +22,6 @@ if __name__ == "__main__":
     parser.add_argument('--nseeds', type=str, help='seed node to use for sampling the network')
     parser.add_argument('--output', type=str, help='output dir to write the dataset to')
     parser.add_argument('--bloom', type=str, help='path to bloom filter to use for sampling the network')
-    
     args = parser.parse_args()
     
     taxa = args.taxa
@@ -70,6 +67,7 @@ if __name__ == "__main__":
         for iseed in range(nseeds):
             seed = next(subjs)
             print('seed:',seed)
+            
             subg = sampler.sample( rg = rg , seed = seed,  layer_limit= 2 , sample_run = 20 )
             print(set([p for p in subg.predicates()]))
             print("rdflib Graph sampled successfully with {} triples".format(len(subg)))
