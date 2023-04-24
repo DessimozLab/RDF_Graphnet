@@ -10,7 +10,7 @@ import sparse
 
 
 # transform an rdflib graph to a heterodata object
-def rdf_to_hetero(rdf_graph , predlinks = None, prednodes = None):
+def rdf_to_hetero(rdf_graph ,  predlinks = None, prednodes = None):
     # create a new heterodata object
 
     data = HeteroData()
@@ -18,27 +18,28 @@ def rdf_to_hetero(rdf_graph , predlinks = None, prednodes = None):
     edge_types = set([p for s,p,o in rdf_graph])
     edge_types = {e:i for i,e in enumerate(edge_types)}
 
-    # Define the RDF types we want to find
-    subject_type = URIRef(RDF.subject)
-    object_type = URIRef(RDF.object)
+    ex_ns = rdf_graph.namespace_manager.namespaces()
+    #find all subject and object types in the namespace
+    types = [ t for type_uri in ex_ns ]
+    #create and index for all of the objects with each type
 
-    # Find all subjects and objects and their types
-    subject_types = set()
-    object_types = set()
-    for subject, predicate, obj in g:
-        if predicate == subject_type:
-            subject_types.add((subject, obj))
-        elif predicate == object_type:
-            object_types.add((subject, obj))
+    node_index_by_type = {}
+    for t in types:
+        node_index_by_type[t] = { tup[0]:i for i,tup in enumerate(rdf_graph.triples(( None , RDF.type, t) ) ) }
+
     for edge_type in edge_types:
-        for stype in subject_types:
-            for otype in object_types:
+        for t1,t2 in itertools.product(node_index_by_type,node_index_by_type):
                 # create a dictionary of nodes
-                rows = { tup[0]:i for i,tup in enumerate(rdf_graph.triples(( None , subject_type, stype) ) ) }
-                columns = { tup[2]:i for i,tup in enumerate(rdf_graph.triples(( None , object_type, otype) ) ) }
-                adj = scipy.sparse.lil_matrix( shape = (len(rows), len(columns)))
-                [ adj[rows[s], columns[o]] = 1 for s,p,o in rdf_graph.triples((None, edge_type, None))]
-                data[ stype.n3() , p.n3() , otype.n3() ].edge_index = from_scipy_sparse_matrix(adj)
+                rows = node_index_by_type[t1]
+                columns = node_index_by_type[t2]
+                triples =  [ (s,p,o) if rdf_graph.triples((None, edge_type, None)) if s.type == t1 and o.type == t2 ]
+
+                if len(rows>0) and len(columns>0):
+                    adj = scipy.sparse.lil_matrix( shape = (len(rows), len(columns)))
+                    [ adj[rows[s], columns[o]] = 1 for s,p,o in ]
+
+
+                    data[ stype.n3() , p.n3() , otype.n3() ].edge_index = from_scipy_sparse_matrix(adj)
                 
     return data
 
