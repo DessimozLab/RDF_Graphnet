@@ -1,6 +1,52 @@
 import torch
 from torch_geometric.data import HeteroData , Data
 import networkx as nx
+import rdflib
+import sparse 
+import numpy as np
+
+# transform an rdflib graph to a heterodata object
+def rdf_to_hetero(rdf_graph):
+    
+    # create a new heterodata object
+    data = HeteroData()
+    # assign edge types from the predicate
+    edge_types = set([p for s,p,o in rdf_graph])
+    edge_types = {e:i for i,e in enumerate(edge_types)}
+
+    #assign a matrix row to each subject and object
+    subjects = set([s for s,p,o in rdf_graph])
+    objects = set([o for s,p,o in rdf_graph])
+    total_nodes = subjects.union(objects)
+    object_types = set( [ o.n3().split('/')[0:-1] for in total_nodes] )
+    object_types = {o:i for i,o in enumerate(object_types)}
+    #create 1 hot encoding for each node
+    node_types = torch.zeros(len(total_nodes), len(object_types))
+    for i, node in enumerate(total_nodes):
+        node_types[i, object_types[node.n3().split('/')[0:-1]]] = 1
+    data['node'].x = node_types
+    #create a sparse tensor node x node x edge_type
+    for edge_type in edge_types:
+        adj  = lil_matrix( shape = (len(total_nodes), len(total_nodes))))
+        [ adj[total_nodes[s], total_nodes[o]] = 1 for s,p,o in rdf_graph.triples((None, edge_type, None))]
+        adj = from_scipy_sparse_matrix(adj)
+        data['node' , p  , 'node'].edge_index = adj
+        data['node' , p  , 'node'].edge_attr = torch.ones(adj.shape[1], 1)
+
+    return data
+
+
+    # create a dictionary of nodes
+    
+    nodes = {s: {'type': 'subject', 'feature': s} for s in subjects}
+    nodes.update({o: {'type': 'object', 'feature': o} for o in objects})
+
+
+    
+    # add edges to the heterodata object for each edge type
+        
+
+
 
 def nx_multigraph_to_heterodata(nx_graph):
     # Create a new HeteroData object

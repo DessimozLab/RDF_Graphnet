@@ -3,9 +3,6 @@ import grabhogs_sparql
 import map2string_fast
 import addfrombloom
 import rdflib
-import SPARQLWrapper
-import colour
-import itertools
 import networkx as nx
 import glob
 from matplotlib import pyplot as plt
@@ -14,6 +11,7 @@ from rdflib import Graph, URIRef
 
 if __name__ == "__main__":        
     
+
     #parse the command line arguments
     import argparse
     parser = argparse.ArgumentParser(description='Compile a dataset from STRING RDF')
@@ -40,7 +38,6 @@ if __name__ == "__main__":
     bloom = args.bloom
 
     #if no taxa or proteins are specified, use all of them
-
     if taxa is None:
         links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/*.protein.links.rdf.v11.5.txt.gz'
         linkfiles = glob.glob(links)
@@ -61,7 +58,6 @@ if __name__ == "__main__":
         filters = addfrombloom.load_filters(bloom)
 
     for file in linkfiles:
-        
         #go through all the link files and sample some networks
         datapath = linkfiles[file]['links']
         tax = datapath.split('/')[-1].split('.')[0]
