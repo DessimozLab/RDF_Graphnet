@@ -6,13 +6,9 @@ from rdflib.namespace import RDF
 import rdflib
 import sparse
 
-
-
-
 # transform an rdflib graph to a heterodata object
 def rdf_to_hetero(rdf_graph ,  predlinks = None, prednodes = None):
     # create a new heterodata object
-
     data = HeteroData()
     # assign edge types from the predicate
     edge_types = set([p for s,p,o in rdf_graph])
@@ -26,6 +22,7 @@ def rdf_to_hetero(rdf_graph ,  predlinks = None, prednodes = None):
     node_index_by_type = {}
     for t in types:
         node_index_by_type[t] = { tup[0]:i for i,tup in enumerate(rdf_graph.triples(( None , RDF.type, t) ) ) }
+
 
     for edge_type in edge_types:
         for t1,t2 in itertools.product(node_index_by_type,node_index_by_type):
