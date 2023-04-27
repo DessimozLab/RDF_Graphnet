@@ -5,12 +5,29 @@ import addfrombloom
 import rdflib
 import networkx as nx
 import glob
+import os
 from matplotlib import pyplot as plt
 from rdflib import Graph, URIRef
 
 
 if __name__ == "__main__":        
+
     #parse the command line arguments
+
+    #default values
+    #taxa = '9606'
+    taxa = '9031'
+
+    server = 'dna076'
+    serverurl = "http://"+server+":3030/string_fuseki/sparql"
+    layer_limit = 2
+    sample_run = 20
+    sample_size = 100
+    nseeds = 1000
+    output = 'test'
+    proteins = None
+    bloom = None
+
     import argparse
     parser = argparse.ArgumentParser(description='Compile a dataset from STRING RDF')
     parser.add_argument('--taxa', type=str, nargs='+', help='taxa to include in the dataset')
@@ -23,38 +40,39 @@ if __name__ == "__main__":
     parser.add_argument('--output', type=str, help='output dir to write the dataset to')
     parser.add_argument('--bloom', type=str, help='path to bloom filter to use for sampling the network')
     args = parser.parse_args()
+    for arg in vars(args):
+        print(arg, getattr(args, arg))
+        if getattr(args, arg) is not None:
+            exec('{} = {}'.format(arg, getattr(args, arg)))
     
-    taxa = args.taxa
-    proteins = args.proteins
-    serverurl = args.serverurl
-    layer_limit = args.layer_limit
-    sample_run = args.sample_run
-    sample_size = args.sample_size
-    nseeds = args.nseeds
-    output = args.output
-    bloom = args.bloom
 
     #if no taxa or proteins are specified, use all of them
     if taxa is None:
+        print('running on full string dataset')
         links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/*.protein.links.rdf.v11.5.txt.gz'
         linkfiles = glob.glob(links)
         linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
-        print(len(linkfiles ))
+        print(len(linkfiles ) )
     else:
+        print( 'running on ' + taxa )
         linkfiles = []
         taxa = taxa.split(',')
         for t in taxa:
             links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/{}.protein.links.rdf.v11.5.txt.gz'.format(t)
             linkfiles += glob.glob(links)
         linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
-        print(len(linkfiles ))
+        print(len(linkfiles ) ,linkfiles)
+
     #load string bloom filters
+    print('loading string bloom filters')
     if bloom:
         filters = addfrombloom.load_filters(bloom)
     else:
-        filters = addfrombloom.load_filters(bloom)
+        filters = addfrombloom.load_filters()
 
+    print('loading string graph for sampling')
     for file in linkfiles:
+        print(file)
         #go through all the link files and sample some networks
         datapath = linkfiles[file]['links']
         tax = datapath.split('/')[-1].split('.')[0]
@@ -67,7 +85,6 @@ if __name__ == "__main__":
         for iseed in range(nseeds):
             seed = next(subjs)
             print('seed:',seed)
-            
             subg = sampler.sample( rg = rg , seed = seed,  layer_limit= 2 , sample_run = 20 )
             print(set([p for p in subg.predicates()]))
             print("rdflib Graph sampled successfully with {} triples".format(len(subg)))
@@ -77,7 +94,7 @@ if __name__ == "__main__":
             cross_ref = rdflib.term.URIRef("http://purl.org/lscr#xrefUniprot")
             orthograph =  grabhogs_sparql.grab_hogs_graph( subg , cross_ref , sparql_endpoint= None
                         , USE_CASE = 1 , verbose = True , cross_ref_prop = rdflib.term.URIRef("http://purl.org/lscr#xrefUniprot"))
-            print("rdflib Graph annotated successfully with {} triples".format(len(orthograph)))
+            print("orthology graph retreived w sparql query with {} triples".format(len(orthograph)))
             #get all species
             taxa = [ 'protein1_uniprot_taxon_orth' , 'protein1_uniprot_taxon_para']
             species = set( [ o for t in taxa  for s,p,o in orthograph.triples((None, URIRef(t), None))  ])
@@ -85,22 +102,28 @@ if __name__ == "__main__":
             #get all proteins for each species
             prots_by_species = { spec: set([s  for s,p,o in orthograph.triples((None, URIRef(t), spec ))]) for t in taxa for spec in species  }
             prots_by_species = { spec:prots_by_species[spec] for spec in prots_by_species if len(prots_by_species[spec])   }
-            prots_by_species = { spec:[ p.replace('https://string-db.org/network/' , '' ) for p in prots_by_species[spec] ] for spec in prots_by_species }
+            prots_by_species = { spec:[ p.replace('http://purl.uniprot.org/uniprot/' , '' ) for p in prots_by_species[spec] ] for spec in prots_by_species }
             #"http://"+server+":3030/string_fuseki/sparql"
+
+            print('mapping orthologs to string')
             ortho_xrefgraph = map2string_fast.mapall(prots_by_species , serverurl=serverurl  , retgraph = True)
+            print( 'orthologs mapped to string with {} triples'.format(len(ortho_xrefgraph)) )   
             orthograph += ortho_xrefgraph
             subg += orthograph
             #lets add the interactions for all using the bloom filters
-            print( len(orthograph ) , set([p for p in orthograph.predicates() ]) )
+            print('adding all interactions using bloom filter')
             #get string ids by species
             pred = rdflib.term.URIRef('http://purl.org/lscr#xrefUniprot')
             interactions = []
             for spec in prots_by_species:
-                stringids = [ s for prot in prots_by_species[spec] for s,p,o in orthograph.triples((None, pred , prot )) ]
-                #stringids = [ s.replace('https://string-db.org/network/' , '' ) for s in stringids ]
+                stringids = [ s for prot in prots_by_species[spec] for s,p,o in orthograph.triples((None, pred , URIRef('http://purl.uniprot.org/uniprot/'+prot) )) ]
+                stringids = [ s.replace('https://string-db.org/network/' , '' ) for s in stringids ]
+                before = len(interactions)
                 if len(stringids ) > 2 :
                     interactions += addfrombloom.check_allvall( objects = stringids , urlstring = 'https://string-db.org/network/' , filters = filters )
             [subg.add(t) for t in interactions]
+            print('found {} interactions'.format(len(interactions)))
+
             #halelujah we have a graph with everything in it
             #serialize to turtle format
             v = subg.serialize(format="ttl")
