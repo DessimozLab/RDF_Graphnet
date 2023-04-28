@@ -63,9 +63,7 @@ def load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , n
                 stringids = [ s.replace('https://string-db.org/network/' , '' ) for s in stringids ]
                 before = len(interactions)
                 if len(stringids ) > 2 :
-
-                    
-                    interactions += addfrombloom.check_allvall( objects = stringids , urlstring = 'https://string-db.org/network/' , filters = filters )
+                    interactions += addfrombloom.check_allvall_mp( objects = stringids , urlstring = 'https://string-db.org/network/' , filters = filters )
                     if len(interactions)-before>0:
                         print('found {} interactions for species {}'.format(len(interactions)-before , spec))
             [subg.add(t) for t in interactions]
