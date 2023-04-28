@@ -10,66 +10,9 @@ from matplotlib import pyplot as plt
 from rdflib import Graph, URIRef
 
 
-if __name__ == "__main__":        
 
-    #parse the command line arguments
 
-    #default values
-    #taxa = '9606'
-    taxa = '9031'
-
-    server = 'dna076'
-    serverurl = "http://"+server+":3030/string_fuseki/sparql"
-    layer_limit = 2
-    sample_run = 20
-    sample_size = 100
-    nseeds = 1000
-    output = 'test'
-    proteins = None
-    bloom = None
-
-    import argparse
-    parser = argparse.ArgumentParser(description='Compile a dataset from STRING RDF')
-    parser.add_argument('--taxa', type=str, nargs='+', help='taxa to include in the dataset')
-    parser.add_argument('--proteins', type=str, nargs='+', help='proteins to include in the dataset')
-    parser.add_argument('--serverurl', type=str, help='URL of the SPARQL endpoint to use for mapping Uniprot IDs to STRING IDs')
-    parser.add_argument('--layer_limit', type=int, help='maximum number of layers to include in the dataset')
-    parser.add_argument('--sample_run', type=int, help='number of times to sample the network')
-    parser.add_argument('--sample_size', type=int, help='number of nodes to sample from the network')
-    parser.add_argument('--nseeds', type=str, help='seed node to use for sampling the network')
-    parser.add_argument('--output', type=str, help='output dir to write the dataset to')
-    parser.add_argument('--bloom', type=str, help='path to bloom filter to use for sampling the network')
-    args = parser.parse_args()
-    for arg in vars(args):
-        print(arg, getattr(args, arg))
-        if getattr(args, arg) is not None:
-            exec('{} = {}'.format(arg, getattr(args, arg)))
-    
-
-    #if no taxa or proteins are specified, use all of them
-    if taxa is None:
-        print('running on full string dataset')
-        links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/*.protein.links.rdf.v11.5.txt.gz'
-        linkfiles = glob.glob(links)
-        linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
-        print(len(linkfiles ) )
-    else:
-        print( 'running on ' + taxa )
-        linkfiles = []
-        taxa = taxa.split(',')
-        for t in taxa:
-            links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/{}.protein.links.rdf.v11.5.txt.gz'.format(t)
-            linkfiles += glob.glob(links)
-        linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
-        print(len(linkfiles ) ,linkfiles)
-
-    #load string bloom filters
-    print('loading string bloom filters')
-    if bloom:
-        filters = addfrombloom.load_filters(bloom)
-    else:
-        filters = addfrombloom.load_filters()
-
+def load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , nseeds , output , proteins , filters , server ):
     print('loading string graph for sampling')
     for file in linkfiles:
         print(file)
@@ -134,3 +77,67 @@ if __name__ == "__main__":
             filename = output + '/tax_{}_seed_{}.ttl'.format(seed.split('/')[-1] , tax )
             with open(filename, 'w') as graphout:
                 graphout.write(v)
+
+
+if __name__ == "__main__":        
+
+    #parse the command line arguments
+
+    #default values
+    #taxa = '9606'
+    taxa = '402676'
+
+    server = 'dna076'
+    serverurl = "http://"+server+":3030/string_fuseki/sparql"
+    layer_limit = 2
+    sample_run = 20
+    sample_size = 100
+    nseeds = 1000
+    output = 'test'
+    proteins = None
+    bloom = None
+
+    import argparse
+    parser = argparse.ArgumentParser(description='Compile a dataset from STRING RDF')
+    parser.add_argument('--taxa', type=str, nargs='+', help='taxa to include in the dataset')
+    parser.add_argument('--proteins', type=str, nargs='+', help='proteins to include in the dataset')
+    parser.add_argument('--serverurl', type=str, help='URL of the SPARQL endpoint to use for mapping Uniprot IDs to STRING IDs')
+    parser.add_argument('--layer_limit', type=int, help='maximum number of layers to include in the dataset')
+    parser.add_argument('--sample_run', type=int, help='number of times to sample the network')
+    parser.add_argument('--sample_size', type=int, help='number of nodes to sample from the network')
+    parser.add_argument('--nseeds', type=str, help='seed node to use for sampling the network')
+    parser.add_argument('--output', type=str, help='output dir to write the dataset to')
+    parser.add_argument('--bloom', type=str, help='path to bloom filter to use for sampling the network')
+    args = parser.parse_args()
+    for arg in vars(args):
+        print(arg, getattr(args, arg))
+        if getattr(args, arg) is not None:
+            exec('{} = {}'.format(arg, getattr(args, arg)))
+    
+
+    #if no taxa or proteins are specified, use all of them
+    if taxa is None:
+        print('running on full string dataset')
+        links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/*.protein.links.rdf.v11.5.txt.gz'
+        linkfiles = glob.glob(links)
+        linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
+        print(len(linkfiles ) )
+    else:
+        print( 'running on ' + taxa )
+        linkfiles = []
+        taxa = taxa.split(',')
+        for t in taxa:
+            links = '/work/FAC/FBM/DBC/cdessim2/default/dmoi/datasets/STRING/rdf/protein.links.rdf.v11.5/{}.protein.links.rdf.v11.5.txt.gz'.format(t)
+            linkfiles += glob.glob(links)
+        linkfiles = { l:{ 'links':l , 'info':l.replace('protein.links' , 'protein.info' ) } for l in linkfiles}
+        print(len(linkfiles ) ,linkfiles)
+
+    #load string bloom filters
+    print('loading string bloom filters')
+    if bloom:
+        filters = addfrombloom.load_filters(bloom)
+    else:
+        filters = addfrombloom.load_filters()
+
+    load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , nseeds , output , proteins , filters , server )
+    

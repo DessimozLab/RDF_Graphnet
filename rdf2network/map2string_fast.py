@@ -51,6 +51,7 @@ def mapall(proteins_by_species, serverurl= "http://dna081:3030/string_fuseki/spa
                         results_string_per_protein[protein] = string_id
                         continue
                     else:
+                        
                         unmapped +=1 
                 # invoking the STRING API is costly, only do this for validation:
                 #try:
