@@ -8,8 +8,7 @@ import glob
 import os
 from matplotlib import pyplot as plt
 from rdflib import Graph, URIRef
-
-
+import functools
 
 
 def load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , nseeds , output , proteins , filters , server ):
@@ -59,6 +58,7 @@ def load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , n
             pred = rdflib.term.URIRef('http://purl.org/lscr#xrefUniprot')
             interactions = []
             for spec in prots_by_species:
+                print(spec)
                 stringids = [ s for prot in prots_by_species[spec] for s,p,o in orthograph.triples((None, pred , URIRef('http://purl.uniprot.org/uniprot/'+prot) )) ]
                 stringids = [ s.replace('https://string-db.org/network/' , '' ) for s in stringids ]
                 before = len(interactions)
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     #taxa = '9606'
     taxa = '402676'
 
-    server = 'dna076'
+    server = 'dna067'
     serverurl = "http://"+server+":3030/string_fuseki/sparql"
     layer_limit = 2
     sample_run = 20
