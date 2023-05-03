@@ -69,6 +69,7 @@ def load_data(linkfiles , serverurl , layer_limit , sample_run , sample_size , n
                             subg.add(t)
                         interactions = []
             print('found {} interactions'.format(len(interactions)))
+            
             #halelujah we have a graph with everything in it
             #serialize to turtle format
             v = subg.serialize(format="ttl")
