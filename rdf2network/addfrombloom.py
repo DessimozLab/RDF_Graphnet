@@ -42,7 +42,6 @@ def check_filters_mp(vals,filters , pool , verbose = False ):
     res = np.any(res, axis=0)
     return list(res)
 
-
 def load_filters(filters = './filters/bloomfinal_big*.pkl' ):
     filters = glob.glob(filters)
     filters = [ pickle.load(open(f, 'rb')) for f in filters ]

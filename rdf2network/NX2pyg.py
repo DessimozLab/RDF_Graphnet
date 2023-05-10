@@ -2,18 +2,32 @@ import torch
 from torch_geometric.data import HeteroData , Data
 import networkx as nx
 from rdflib.namespace import RDF
-
 import rdflib
-import sparse
 # create a new heterodata object
 from torch_geometric.data import HeteroData , Data
 import torch_geometric.transforms as T
 import torch_geometric.utils 
-from rdflib import RDF
+from rdflib import RDF , URIRef
+import itertools
 import numpy as np
 import scipy.sparse
 import torch
 
+
+def sparse2pairs(sparsemat, matrows = None):
+    '''
+    This functino takes a sparse matrix and returns a list of pairs of the non zero entries
+    args:
+        sparsemat: a sparse matrix
+        matrows: a list of the matrix rows to keep
+    Returns:    
+        a list of pairs of the non zero entries
+    '''
+    if matrows :
+        sparsemat = sparsemat[matrows,:]
+        sparsemat = sparsemat[:,matrows]
+    sparsemat = scipy.sparse.find(sparsemat)
+    return np.vstack([sparsemat[0],sparsemat[1]])
 
 def sparse2pairs(sparsemat, matrows = None):
     '''
@@ -46,44 +60,65 @@ def rdf2hetero(rdf_graph , verbose = True):
                     subtypes[uri_type] = set([])
                 uris[uri_type].append(o)
                 subtypes[uri_type].add( ''.join(o.n3().split('/')[0:-1] )  )
-    if verbose == True:
-        for t in subtypes:
-            #compile the x data matrix for each subtype
-            subtype_dict = { ty:i for i,ty in enumerate(subtypes[t])}
-            indices = [ subtype_dict[''.join(o.n3().split('/')[0:-1])] for o in uris[t] ]
-            x= np.zeros( (len(uris[t]), len(subtype_dict)))
-            x[:,indices] = 1
-            #for now this is 1hot for subtype
-            #add some more descriptive data here if you have it
-            data[t].x = torch.tensor(x , dtype=torch.float )
+    
+    
+    allsubtypes = {}
+    inputdims = {}
+
+    for t in subtypes:
+        #compile the x data matrix for each subtype
+        subtype_dict = { ty:i for i,ty in enumerate(subtypes[t])}
+        allsubtypes[t] = subtype_dict
+        indices = [ subtype_dict[''.join(o.n3().split('/')[0:-1])] for o in uris[t] ]
+        x= np.zeros( (len(uris[t]), len(subtype_dict)))
+        inputdims[t] = len(subtype_dict)
+        x[:,indices] = 1
+        #for now this is 1hot for subtype
+        #add some more descriptive data here if you have it
+        data[t].x = torch.tensor(x , dtype=torch.float )
+    
     node_index_by_type = { uritype : { n:i for i,n in enumerate( set(uris[uritype]) ) } for uritype in uris }
     #todo add the diff types of uris within each namespace as 1hot encoded for x attribute of each node
+    
+    interactions = {}
     for t1,t2 in itertools.product(node_index_by_type,node_index_by_type):
             rows = node_index_by_type[t1]
             columns = node_index_by_type[t2]
+            
             if verbose == True:
                 print(t1,len(rows),t2, len(columns)) 
-                
             for edge_type in edge_types:
                 
+                #add the number of input dimension for the rows here
+                #for now this is just the subtype 1 hot. theres prob a more elegant way to pass this info along or get it from the data obj
+                
                 # create a dictionary of nodes
-                
                 triples =  [ (s,p,o) for s,p,o in rdf_graph.triples((None, edge_type, None))  if ( s in rows and o in columns )  ]
-                
                 if len(triples)>0:
+
+                    interactions[(t1,edge_type.n3(),t2)] = len(allsubtypes[t1])
+                    interactions[(t2, 'rev_'+edge_type.n3(),t1)] = len(allsubtypes[t1])
+
+
                     adj = scipy.sparse.lil_matrix((len(rows), len(columns)))
-                    for s,p,o in triples:    
+                    for s,p,o in triples:
                         adj[rows[s], columns[o]] = 1
                     if verbose == True:
-                        print(adj.sum())
-                        pass
-                    #between subgraphs
-                    data[ t1 , p.n3() , t2 ].edge_index = torch.tensor( sparse2pairs(adj) ,  dtype=torch.long )
-                    if t1 == t2:
-                        #within a subgraph of the same namespace
-                        data[ t1 , p.n3() , t2 ].edge_index  = torch_geometric.utils.add_self_loops(data[ t1 , p.n3() , t2 ].edge_index )
+                        print('nadj:', adj.sum())
+                        print( t1,len(node_index_by_type[t1]) ,t2, len(node_index_by_type[t2]))
+                        print( edge_type , len(triples) )
+                    if adj.sum() >0 :
+                        #between subgraphs
+                        data[ t1 , edge_type.n3() , t2 ].edge_index = torch.tensor( sparse2pairs(adj) ,  dtype=torch.long )
+                        if t1 == t2:
+                            #within a subgraph of the same namespace
+                            torch_geometric.utils.add_self_loops(data[ t1 , edge_type.n3() , t2 ].edge_index )
+    
     data = T.ToUndirected()(data)
-    return data
+    data = T.AddSelfLoops()(data)
+    return data , inputdims , interactions 
+
+
 
 def nx_multigraph_to_heterodata(nx_graph):
     # Create a new HeteroData object
