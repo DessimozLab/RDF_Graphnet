@@ -116,7 +116,10 @@ def rdf2hetero(rdf_graph , verbose = True):
     
     data = T.ToUndirected()(data)
     data = T.AddSelfLoops()(data)
-    return data , inputdims , interactions 
+
+
+    
+    return data , inputdims , interactions , node_index_by_type
 
 
 
